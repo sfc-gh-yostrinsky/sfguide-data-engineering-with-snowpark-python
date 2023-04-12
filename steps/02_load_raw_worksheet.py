@@ -48,7 +48,7 @@ def load_all_raw_tables(session):
             # Only load the first 3 years of data for the order tables at this point
             # We will load the 2022 data later in the lab
             if tname in ['order_header', 'order_detail']:
-                for year in ['2020', '2021']:
+                for year in ['2021']:
                     load_raw_table(session, tname=tname, s3dir=s3dir, year=year, schema=schema)
             else:
                 load_raw_table(session, tname=tname, s3dir=s3dir, schema=schema)
@@ -66,5 +66,8 @@ def validate_raw_tables(session):
 
 # For local debugging
 def main(session: snowpark.Session): 
+    session.use_schema('HOL_DB.PUBLIC')
+    session.use_role('HOL_ROLE')
+    session.use_warehouse('HOL_WH')
     load_all_raw_tables(session)
 #    validate_raw_tables(session)
