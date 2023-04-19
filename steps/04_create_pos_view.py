@@ -114,6 +114,10 @@ if __name__ == "__main__":
 
     from utils import snowpark_utils
     session = snowpark_utils.get_snowpark_session()
+    session.use_schema('HOL_DB.PUBLIC')
+    session.use_role('HOL_ROLE')
+    session.use_warehouse('HOL_WH')
+    session.query_tag = 'HOL_TAG'
 
     create_pos_view(session)
     create_pos_view_stream(session)

@@ -69,5 +69,8 @@ def main(session: snowpark.Session):
     session.use_schema('HOL_DB.PUBLIC')
     session.use_role('HOL_ROLE')
     session.use_warehouse('HOL_WH')
+    session.query_tag = 'HOL_TAG'
+
+
     load_all_raw_tables(session)
 #    validate_raw_tables(session)
